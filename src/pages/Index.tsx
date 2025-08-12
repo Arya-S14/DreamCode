@@ -6,25 +6,25 @@ import { Sparkles, Heart } from 'lucide-react';
 const Index = () => {
   const features = [
     {
-      title: "Code Genie",
+      title: "Dream Code",
       description: "Turn your ideas into beautiful code with just a few words! Ask me to create buttons, functions, or anything you can imagine.",
       icon: "🧚‍♀️",
       gradient: "bg-gradient-to-br from-pink-50 to-purple-50",
-      link: "/code-genie"
+      link: "/DreamCode"
     },
     {
       title: "Fun Math",
       description: "Make math magical! Create calculators, solve equations, and build number games with colorful code.",
       icon: "🧮",
       gradient: "bg-gradient-to-br from-blue-50 to-cyan-50",
-      link: "/code-genie"
+      link: "/DreamCode"
     },
     {
       title: "Design Magic",
       description: "Paint the web with colors! Learn to create beautiful buttons, cards, and layouts that sparkle.",
       icon: "🎨",
       gradient: "bg-gradient-to-br from-green-50 to-teal-50",
-      link: "/code-genie"
+      link: "/DreamCode"
     }
   ];
 
@@ -54,7 +54,7 @@ const Index = () => {
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
               <Button 
                 className="btn-magical text-lg px-8 py-6"
-                onClick={() => window.location.href = '/code-genie'}
+                onClick={() => window.location.href = '/DreamCode'}
               >
                 <Sparkles className="w-5 h-5 mr-2" />
                 Start Creating Magic
@@ -62,6 +62,7 @@ const Index = () => {
               <Button 
                 variant="outline" 
                 className="rounded-full px-8 py-6 text-lg border-2 hover:scale-105 transition-transform"
+                onClick={() => window.location.href = '/about'}
               >
                 <Heart className="w-5 h-5 mr-2" />
                 Learn More

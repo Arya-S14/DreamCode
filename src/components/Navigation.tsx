@@ -7,7 +7,7 @@ const Navigation = () => {
 
   const navItems = [
     { name: 'Home', path: '/', emoji: '🏠' },
-    { name: 'Code Genie', path: '/code-genie', emoji: '🧚‍♀️' },
+    { name: 'Dream Code', path: '/DreamCode', emoji: '🧚‍♀️' },
     { name: 'About', path: '/about', emoji: '💖' },
   ];
 
@@ -19,7 +19,7 @@ const Navigation = () => {
           <Link to="/" className="flex items-center space-x-2">
             <div className="text-3xl animate-bounce-gentle">🌸</div>
             <span className="font-handwritten text-2xl font-bold text-gradient">
-              CodeMagic
+              Dream Code
             </span>
           </Link>
 

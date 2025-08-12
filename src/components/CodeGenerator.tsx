@@ -32,45 +32,60 @@ const CodeGenerator = () => {
     "Write a function to reverse a string"
   ];
 
-  // Mock function - in real app, this would call your backend
-  const generateCode = async () => {
-    if (!prompt.trim() || !language) {
-      toast({
-        title: "Oops! 🙈",
-        description: "Please enter a prompt and select a language first!",
-        variant: "destructive",
-      });
-      return;
-    }
+    const extractCode = (responseText) => {
+    const match = responseText.match(/```(?:\w+)?\n([\s\S]*?)```/);
+    if (match && match[1]) return match[1].trim();
+    return responseText.trim();
+  };
 
-    setIsLoading(true);
-    
-    // Simulate API call
-    setTimeout(() => {
-      // Mock generated code based on language and prompt
-      let mockCode = '';
-      
-      if (language === 'python') {
-        mockCode = `# ${prompt}\ndef example_function():\n    # Generated Python code\n    result = 5 * 10\n    return result\n\nprint(example_function())`;
-      } else if (language === 'javascript') {
-        mockCode = `// ${prompt}\nfunction exampleFunction() {\n    // Generated JavaScript code\n    const result = 5 * 10;\n    return result;\n}\n\nconsole.log(exampleFunction());`;
-      } else if (language === 'html') {
-        mockCode = `<!-- ${prompt} -->\n<button style="background-color: red; color: white; padding: 10px 20px; border: none; border-radius: 5px;">\n    Click Me\n</button>`;
-      } else if (language === 'css') {
-        mockCode = `/* ${prompt} */\n.my-button {\n    background-color: red;\n    color: white;\n    padding: 10px 20px;\n    border: none;\n    border-radius: 5px;\n    cursor: pointer;\n}`;
-      } else {
-        mockCode = `// ${prompt}\n// Generated ${language} code\nint main() {\n    int result = 5 * 10;\n    return 0;\n}`;
-      }
-      
-      setGeneratedCode(mockCode);
-      setIsLoading(false);
-      
+ const generateCode = async () => {
+  if (!prompt.trim() || !language) {
+    toast({
+      title: "Oops! 🙈",
+      description: "Please enter a prompt and select a language first!",
+      variant: "destructive",
+    });
+    return;
+  }
+
+  setIsLoading(true);
+
+  try {
+   const response = await fetch("http://127.0.0.1:5000/api/generate-code", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ prompt, language }),
+});
+
+
+    const data = await response.json();
+
+    if (response.ok) {
+      const onlyCode = extractCode(data.code);
+        setGeneratedCode(onlyCode);
       toast({
         title: "Magic Complete! ✨",
         description: "Your code has been generated successfully!",
       });
-    }, 2000);
-  };
+    } else {
+      toast({
+        title: "Oops!",
+        description: "Failed to get code from the server.",
+        variant: "destructive",
+      });
+    }
+  } catch (error) {
+    console.error(error);
+    toast({
+      title: "Server Error 😢",
+      description: "Could not reach the backend.",
+      variant: "destructive",
+    });
+  }
+
+  setIsLoading(false);
+};
+
 
   const copyCode = () => {
     navigator.clipboard.writeText(generatedCode);
@@ -251,7 +266,7 @@ const CodeGenerator = () => {
             Ready for Real Magic?
           </h3>
           <p className="text-sm text-accent-foreground">
-            This demo shows mock code generation. To connect with OpenAI's API, you'll need to set up the backend as described in the documentation!
+           We'll Happy to seeing You  Everytime!!
           </p>
         </div>
       </Card>
