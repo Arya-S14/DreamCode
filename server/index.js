@@ -17,7 +17,7 @@ app.post("/api/generate-code", async (req, res) => {
 
   try {
     const response = await axios.post(
-      "http://127.0.0.1:11434/api/generate",
+      "https://dreamcode-8ezd.onrender.com/api/generate",
       {
         model: "deepseek-coder",
         prompt: fullPrompt,
@@ -41,6 +41,7 @@ app.post("/api/generate-code", async (req, res) => {
 });
 
 const PORT = 5000;
-app.listen(PORT, () => console.log(`Server running on http://127.0.0.1:${PORT}`));
-
-
+const publicURL = 'https://dreamcode-8ezd.onrender.com';
+app.listen(PORT, () => {
+  console.log(`Server running at ${publicURL}`);
+});

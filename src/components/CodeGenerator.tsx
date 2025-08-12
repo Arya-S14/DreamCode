@@ -51,7 +51,7 @@ const CodeGenerator = () => {
   setIsLoading(true);
 
   try {
-   const response = await fetch("http://127.0.0.1:5000/api/generate-code", {
+   const response = await fetch("https://dreamcode-8ezd.onrender.com/api/generate-code", {
   method: "POST",
   headers: { "Content-Type": "application/json" },
   body: JSON.stringify({ prompt, language }),
